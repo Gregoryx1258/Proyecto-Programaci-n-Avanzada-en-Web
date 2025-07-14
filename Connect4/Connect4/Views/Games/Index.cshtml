@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Connect4.Database.Games>
+@{
+    Layout = null;
+    ViewBag.Title = "Lista de Partidas";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Partidas - Connect4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f1f8f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h2 {
+            margin-top: 40px;
+            color: #213435;
+            font-size: 36px;
+        }
+
+        table {
+            width: 90%;
+            max-width: 1100px;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #213435;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        tr:hover {
+            background-color: #e0f2f1;
+        }
+
+        a {
+            background-color: #2196f3;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            a:hover {
+                background-color: #1769aa;
+            }
+
+        footer {
+            margin-top: auto;
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h2>Partidas Registradas</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Jugador 1</th>
+                <th>Jugador 2</th>
+                <th>Estado</th>
+                <th>Ganador</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model)
+            {
+                <tr>
+                    <td>@game.Players?.Name</td>
+                    <td>@game.Players1?.Name</td>
+                    <td>@game.Status</td>
+                    <td>@(game.WinnerId.HasValue ? game.Players3?.Name : "Empate o en curso")</td>
+                    <td>
+                        @Html.ActionLink("Ver", "Board", new { id = game.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <footer>© 2025 - Proyecto Connect4</footer>
+</body>
+</html>

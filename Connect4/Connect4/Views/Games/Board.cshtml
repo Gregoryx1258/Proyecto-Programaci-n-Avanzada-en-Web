@@ -1,0 +1,119 @@
+﻿@model Connect4.Database.Games
+
+@{
+    ViewBag.Title = "Partida en juego";
+    string[] columnas = { "A", "B", "C", "D", "E", "F", "G" };
+    string grid = Model.GridJson ?? new string('0', 42);
+    int playerId = Model.CurrentTurnId == Model.Player1Id ? 1 : 2;
+    bool juegoFinalizado = Model.Status == "Finalizado";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="display-5">
+            <i class="bi bi-controller" style="font-size: 2rem;"></i>
+            Partida entre
+            <span class="text-primary">@Model.Players1.Name</span>
+            y
+            <span class="text-danger">@Model.Players2.Name</span>
+        </h2>
+
+        @if (juegoFinalizado && Model.WinnerId.HasValue)
+        {
+            <div class="alert alert-success mt-3" role="alert">
+                🏆 ¡Felicidades <strong>@(Model.WinnerId == Model.Player1Id ? Model.Players1.Name : Model.Players2.Name)</strong>! Has ganado la partida.
+            </div>
+            <a href="@Url.Action("Index", "Games")" class="btn btn-outline-secondary mt-2">Volver a la lista de partidas</a>
+        }
+        else
+        {
+            <p class="lead">
+                Turno de:
+                <strong class="text-success">
+                    @(Model.CurrentTurnId == Model.Player1Id ? Model.Players1.Name : Model.Players2.Name)
+                </strong>
+            </p>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-warning mt-3" role="alert">
+                @TempData["Error"]
+            </div>
+        }
+    </div>
+
+    <div class="table-responsive d-flex justify-content-center">
+        @if (!juegoFinalizado)
+        {
+            <!-- Formulario solo se muestra si la partida sigue en progreso -->
+        }
+    </div>
+
+    @if (!juegoFinalizado)
+    {
+        using (Html.BeginForm("Play", "Games", FormMethod.Post))
+        {
+            @Html.Hidden("id", Model.Id)
+            @Html.Hidden("player", playerId)
+
+            <div class="table-responsive d-flex justify-content-center">
+                <table class="table table-bordered text-center" style="width: auto; background-color: #f9f9f9;">
+                    <thead class="thead-dark">
+                        <tr>
+                            @for (int i = 0; i < 7; i++)
+                            {
+                                <th style="width: 60px;">
+                                    <button type="submit" name="column" value="@i" class="btn btn-sm btn-outline-primary">
+                                        @columnas[i]
+                                    </button>
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int row = 5; row >= 0; row--)
+                        {
+                            <tr>
+                                @for (int col = 0; col < 7; col++)
+                                {
+                                    var cell = grid[row * 7 + col];
+                                    string ficha = cell == '1' ? "🟡" : cell == '2' ? "🔴" : "⬜";
+                                    <td style="font-size: 32px;">@ficha</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-bordered text-center" style="width: auto; background-color: #f9f9f9;">
+                <thead class="thead-dark">
+                    <tr>
+                        @foreach (var col in columnas)
+                        {
+                            <th style="width: 60px;">@col</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int row = 5; row >= 0; row--)
+                    {
+                        <tr>
+                            @for (int col = 0; col < 7; col++)
+                            {
+                                var cell = grid[row * 7 + col];
+                                string ficha = cell == '1' ? "🟡" : cell == '2' ? "🔴" : "⬜";
+                                <td style="font-size: 32px;">@ficha</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Inicio";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Connect4 - Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #e0ffe0);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #213435;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-blue {
+            background-color: #1e88e5;
+        }
+
+        .btn-green {
+            background-color: #43a047;
+        }
+
+        .btn-cyan {
+            background-color: #00bcd4;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a Connect4</h1>
+    <p>Selecciona una opción para comenzar</p>
+
+    <div class="btn-container">
+        <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver Jugadores</a>
+        <a href="@Url.Action("Create", "Games")" class="btn btn-green">Crear Partida</a>
+        <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Ver Partidas</a>
+    </div>
+
+    <footer>© 2025 - Proyecto Connect4</footer>
+</body>
+</html>

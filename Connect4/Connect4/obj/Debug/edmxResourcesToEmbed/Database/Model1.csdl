@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Connect4DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Player1Id" Type="Int32" Nullable="false" />
+    <Property Name="Player2Id" Type="Int32" Nullable="false" />
+    <Property Name="GridJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CurrentTurnId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WinnerId" Type="Int32" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Players" Relationship="Self.FK__Games__CurrentTu__534D60F1" FromRole="Games" ToRole="Players" />
+    <NavigationProperty Name="Players1" Relationship="Self.FK__Games__Player1Id__5165187F" FromRole="Games" ToRole="Players" />
+    <NavigationProperty Name="Players2" Relationship="Self.FK__Games__Player2Id__52593CB8" FromRole="Games" ToRole="Players" />
+    <NavigationProperty Name="Players3" Relationship="Self.FK__Games__WinnerId__5441852A" FromRole="Games" ToRole="Players" />
+  </EntityType>
+  <EntityType Name="Players">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Identification" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Score" Type="Int32" />
+    <Property Name="Wins" Type="Int32" />
+    <Property Name="Losses" Type="Int32" />
+    <Property Name="Draws" Type="Int32" />
+    <NavigationProperty Name="Games" Relationship="Self.FK__Games__CurrentTu__534D60F1" FromRole="Players" ToRole="Games" />
+    <NavigationProperty Name="Games1" Relationship="Self.FK__Games__Player1Id__5165187F" FromRole="Players" ToRole="Games" />
+    <NavigationProperty Name="Games2" Relationship="Self.FK__Games__Player2Id__52593CB8" FromRole="Players" ToRole="Games" />
+    <NavigationProperty Name="Games3" Relationship="Self.FK__Games__WinnerId__5441852A" FromRole="Players" ToRole="Games" />
+  </EntityType>
+  <Association Name="FK__Games__CurrentTu__534D60F1">
+    <End Role="Players" Type="Self.Players" Multiplicity="1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="CurrentTurnId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Games__Player1Id__5165187F">
+    <End Role="Players" Type="Self.Players" Multiplicity="1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Player1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Games__Player2Id__52593CB8">
+    <End Role="Players" Type="Self.Players" Multiplicity="1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Player2Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Games__WinnerId__5441852A">
+    <End Role="Players" Type="Self.Players" Multiplicity="0..1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="WinnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Connect4DBEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Games" EntityType="Self.Games" />
+    <EntitySet Name="Players" EntityType="Self.Players" />
+    <AssociationSet Name="FK__Games__CurrentTu__534D60F1" Association="Self.FK__Games__CurrentTu__534D60F1">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Games__Player1Id__5165187F" Association="Self.FK__Games__Player1Id__5165187F">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Games__Player2Id__52593CB8" Association="Self.FK__Games__Player2Id__52593CB8">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Games__WinnerId__5441852A" Association="Self.FK__Games__WinnerId__5441852A">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
