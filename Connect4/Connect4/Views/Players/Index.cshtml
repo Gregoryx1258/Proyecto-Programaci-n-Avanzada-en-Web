@@ -15,16 +15,36 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', sans-serif;
-            background: #f1f8f5;
+            background: linear-gradient(to right, #1a1a2e, #16213e);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
 
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+            .actions a {
+                text-decoration: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-weight: bold;
+                color: #fff;
+            }
+
         h2 {
             margin-top: 40px;
-            color: #213435;
+            color: white;
             font-size: 36px;
         }
 
@@ -59,15 +79,34 @@
             background-color: #e0f2f1;
         }
 
+
+        .btn-blue {
+            background-color: #1e88e5;
+        }
+
+        .btn-green {
+            background-color: #43a047;
+        }
+
+        .btn-cyan {
+            background-color: #00bcd4;
+        }
+
         footer {
             margin-top: auto;
             margin-bottom: 10px;
-            font-size: 12px;
-            color: #666;
+            color: white;
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="actions">
+            <a href="@Url.Action("/", "Home")" class="btn btn-green">Inicio</a>
+            <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver Jugadores</a>
+            <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Registro de partidas</a>
+        </div>
+    </header>
     <h2>Listado de Jugadores</h2>
 
     <table>
