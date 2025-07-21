@@ -8,12 +8,108 @@
     bool juegoFinalizado = Model.Status == "Finalizado";
 }
 
-<div class="container mt-5">
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(to right, #1a1a2e, #16213e);
+        color: #fff;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #0f0f1a;
+    }
+
+    .logo {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .actions {
+        display: flex;
+        gap: 15px;
+    }
+
+        .actions a {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+    main {
+        text-align: center;
+        padding: 100px 20px;
+        flex: 1;
+    }
+
+    h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: #e0f7fa;
+    }
+
+    h2 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: white;
+    }
+
+    p {
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 30px auto;
+        color: white;
+    }
+
+
+
+    .btn {
+        padding: 15px 30px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-blue {
+        background-color: #1e88e5;
+    }
+
+    .btn-green {
+        background-color: #43a047;
+    }
+
+    .btn-cyan {
+        background-color: #00bcd4;
+    }
+
+    .btn:hover {
+        opacity: 0.85;
+    }
+
+    footer {
+        background-color: #0f0f1a;
+        color: #999;
+        text-align: center;
+        padding: 20px;
+    }
+</style>
+
     <div class="text-center mb-4">
         <h2 class="display-5">
             <i class="bi bi-controller" style="font-size: 2rem;"></i>
             Partida entre
-            <span class="text-primary">@Model.Players1.Name</span>
+            <span class="text-info">@Model.Players1.Name</span>
             y
             <span class="text-danger">@Model.Players2.Name</span>
         </h2>
@@ -91,7 +187,7 @@
     else
     {
         <div class="table-responsive d-flex justify-content-center">
-            <table class="table table-bordered text-center" style="width: auto; background-color: #f9f9f9;">
+            <table class="table table-bordered text-center" style="width: auto;">
                 <thead class="thead-dark">
                     <tr>
                         @foreach (var col in columnas)
@@ -116,4 +212,3 @@
             </table>
         </div>
     }
-</div>

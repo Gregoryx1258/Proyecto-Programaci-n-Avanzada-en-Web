@@ -10,33 +10,88 @@
     <title>Connect4 - Inicio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        body {
+        html, body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to right, #e0f7fa, #e0ffe0);
+            height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #1a1a2e, #16213e);
+            color: #fff;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
+            padding: 15px 30px;
+            background-color: #0f0f1a;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+            nav a {
+                text-decoration: none;
+                color: #fff;
+                transition: color 0.3s ease;
+            }
+
+                nav a:hover {
+                    color: #00bcd4;
+                }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+            .actions a {
+                text-decoration: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-weight: bold;
+                color: #fff;
+            }
+
+        main {
+            text-align: center;
+            padding: 100px 20px;
+            flex: 1;
         }
 
         h1 {
             font-size: 48px;
-            color: #213435;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            color: #e0f7fa;
+        }
+
+        h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: white;
         }
 
         p {
             font-size: 18px;
-            margin-bottom: 30px;
-            color: #333;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            color: white;
         }
 
         .btn-container {
             display: flex;
+            justify-content: center;
             gap: 20px;
+            margin-top: 40px;
         }
 
         .btn {
@@ -67,23 +122,36 @@
         }
 
         footer {
-            position: absolute;
-            bottom: 10px;
-            font-size: 12px;
-            color: #666;
+            background-color: #0f0f1a;
+            color: #999;
+            text-align: center;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Bienvenido a Connect4</h1>
-    <p>Selecciona una opción para comenzar</p>
+    <header>
+        <div class="logo">Connect4</div>
+        <div class="actions">
+            <a href="#" class="btn btn-green">Inicio</a>
+            <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver Jugadores</a>
+            <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Registro de partidas</a>
+        </div>
+    </header>
 
-    <div class="btn-container">
-        <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver Jugadores</a>
-        <a href="@Url.Action("Create", "Games")" class="btn btn-green">Crear Partida</a>
-        <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Ver Partidas</a>
-    </div>
+    <main>
+        <h1>Bienvenido a Connect4</h1>
+        <p>Selecciona una opción para comenzar y empieza a jugar con tus amigos</p>
 
-    <footer>© 2025 - Proyecto Connect4</footer>
+        <div class="btn-container">
+            <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver jugadores</a>
+            <a href="@Url.Action("Create", "Games")" class="btn btn-green">Crear partida</a>
+            <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Ver partidas</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Proyecto Connect4</p>
+    </footer>
 </body>
 </html>
