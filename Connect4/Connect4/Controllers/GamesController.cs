@@ -105,10 +105,18 @@ namespace Connect4.Controllers
             game.GridJson = new string(grid);
 
             // Verificar si hay un ganador
-            if (CheckWinner(game.GridJson, ficha))
+            bool hayGanador = CheckWinner(game.GridJson, ficha);
+            bool isBoardFull = !game.GridJson.Contains('0');
+
+            if (hayGanador)
             {
                 game.Status = "Finalizado";
                 game.WinnerId = (ficha == '1') ? game.Player1Id : game.Player2Id;
+            }
+            else if (isBoardFull) // Tablero lleno = empate
+            {
+                game.Status = "Finalizado";
+                game.WinnerId = null; // Empate
             }
             else
             {
@@ -116,13 +124,20 @@ namespace Connect4.Controllers
                 game.CurrentTurnId = (game.CurrentTurnId == game.Player1Id) ? game.Player2Id : game.Player1Id;
             }
 
+            
             db.Entry(game).State = EntityState.Modified;
             db.SaveChanges();
+
+            // Recalcular estadísticas
+            if (game.Status == "Finalizado")
+            {
+                RecalcularEstadisticas();
+            }
 
             return RedirectToAction("Board", new { id });
         }
 
-        // Lógica para verificar 4 en línea
+        // Lógica para verificar si hay 4 en línea
         private bool CheckWinner(string grid, char ficha)
         {
             int rows = 6, cols = 7;
@@ -166,8 +181,43 @@ namespace Connect4.Controllers
                         return true;
                 }
             }
-
             return false;
+        }
+
+        // Recalcular estadísticas de todos los jugadores
+        private void RecalcularEstadisticas()
+        {
+            var jugadores = db.Players.ToList();
+
+            foreach (var jugador in jugadores)
+            {
+                int wins = db.Games.Count(g => g.WinnerId == jugador.Id && g.Status == "Finalizado");
+                int losses = db.Games.Count(g => g.Status == "Finalizado" &&
+                                    (g.Player1Id == jugador.Id || g.Player2Id == jugador.Id) &&
+                                    g.WinnerId.HasValue && g.WinnerId != jugador.Id);
+                int draws = db.Games.Count(g => g.Status == "Finalizado" &&
+                                    !g.WinnerId.HasValue &&
+                                    (g.Player1Id == jugador.Id || g.Player2Id == jugador.Id));
+                int score = wins * 5 + draws * 2;
+
+                jugador.Wins = wins;
+                jugador.Losses = losses;
+                jugador.Draws = draws;
+                jugador.Score = score;
+
+                db.Entry(jugador).State = EntityState.Modified;
+            }
+
+            db.SaveChanges();
+        }
+
+
+        [HttpGet]
+        public ActionResult RecalcularEstadisticasManual()
+        {
+            RecalcularEstadisticas();
+            TempData["Success"] = "Estadísticas actualizadas correctamente";
+            return RedirectToAction("Index", "Players"); 
         }
     }
 }
