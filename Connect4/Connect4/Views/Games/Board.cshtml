@@ -1,6 +1,7 @@
 ﻿@model Connect4.Database.Games
 @{
     ViewBag.Title = "Partida en juego";
+    Layout = null;
     string[] columnas = { "A", "B", "C", "D", "E", "F", "G" };
     string grid = Model.GridJson ?? new string('0', 42);
     bool juegoFinalizado = Model.Status == "Finalizado";
@@ -14,14 +15,64 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title - Connect4</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(to right, #1a1a2e, #16213e);
             color: white;
-            text-align: center;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: #0f0f1a;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+            .actions a {
+                text-decoration: none;
+                padding: 10px 18px;
+                border-radius: 4px;
+                font-weight: bold;
+                color: #fff;
+            }
+
+        .btn-green {
+            background-color: #43a047;
+        }
+
+        .btn-blue {
+            background-color: #1e88e5;
+        }
+
+        .btn-cyan {
+            background-color: #00bcd4;
+        }
+
+        main {
+            text-align: center;
+            padding: 40px 20px;
+            flex: 1;
         }
 
         table {
@@ -29,6 +80,9 @@
             background: #fff;
             border-collapse: collapse;
             color: black;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         th, td {
@@ -47,6 +101,7 @@
             cursor: pointer;
             font-weight: bold;
             text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary {
@@ -63,66 +118,97 @@
             background: #607d8b;
             color: white;
         }
+
+        .trophy-icon {
+            color: gold;
+            margin-right: 10px;
+        }
+
+        footer {
+            width: 100%;
+            background-color: #0f0f1a;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 14px;
+            color: white;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
-    <h2>Partida entre @jugador1 y @jugador2</h2>
-    <p>Creada el: @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</p>
+    <header>
+        <div class="logo">Connect4</div>
+        <div class="actions">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-green">Inicio</a>
+            <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver Jugadores</a>
+            <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Registro de partidas</a>
+        </div>
+    </header>
 
-    @if (juegoFinalizado)
-    {
-        string ganador = Model.WinnerId.HasValue
-            ? (Model.WinnerId == Model.Player1Id ? jugador1 :
-               Model.WinnerId == Model.Player2Id ? jugador2 : "Empate")
-            : "Empate";
-        <h3>Resultado: @ganador</h3>
-    }
-    else
-    {
-        string turno = Model.CurrentTurnId == Model.Player1Id ? jugador1 : jugador2;
-        <h3>Turno de: @turno</h3>
-    }
+    <main>
+        <h2>Partida entre @jugador1 y @jugador2</h2>
+        <p>Creada el: @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</p>
 
-    <a href="@Url.Action("Index", "Games")" class="btn btn-secondary">Volver</a>
-
-    <form method="post" action="@Url.Action("RestartGame", "Games", new { id = Model.Id })">
-        <button type="submit" class="btn btn-warning">
-            @(juegoFinalizado ? "Nueva partida" : "Reiniciar partida")
-        </button>
-    </form>
-
-    @if (!juegoFinalizado)
-    {
-        using (Html.BeginForm("Play", "Games", FormMethod.Post))
+        @if (juegoFinalizado)
         {
-            @Html.Hidden("id", Model.Id)
+            if (Model.WinnerId.HasValue)
+            {
+                string ganador = Model.WinnerId == Model.Player1Id ? jugador1 : jugador2;
+                <h3><i class="bi bi-trophy-fill trophy-icon"></i>El ganador es: @ganador</h3>
+            }
+            else
+            {
+                <h3>Resultado: Empate</h3>
+            }
+        }
+        else
+        {
+            string turno = Model.CurrentTurnId == Model.Player1Id ? jugador1 : jugador2;
+            <h3>Turno de: @turno</h3>
+        }
 
-            <table>
-                <thead>
-                    <tr>
-                        @for (int i = 0; i < 7; i++)
-                        {
-                            <th>
-                                <button type="submit" name="column" value="@i">@columnas[i]</button>
-                            </th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int row = 5; row >= 0; row--)
-                    {
+        <a href="@Url.Action("Index", "Games")" class="btn btn-secondary">Volver</a>
+
+        <form method="post" action="@Url.Action("RestartGame", "Games", new { id = Model.Id })">
+            <button type="submit" class="btn btn-warning">
+                @(juegoFinalizado ? "Nueva partida" : "Reiniciar partida")
+            </button>
+        </form>
+
+        @if (!juegoFinalizado)
+        {
+            using (Html.BeginForm("Play", "Games", FormMethod.Post))
+            {
+                @Html.Hidden("id", Model.Id)
+                <table>
+                    <thead>
                         <tr>
-                            @for (int col = 0; col < 7; col++)
+                            @for (int i = 0; i < 7; i++)
                             {
-                                char cell = grid[row * 7 + col];
-                                string ficha = cell == '1' ? "🟡" : cell == '2' ? "🔴" : "⬜";
-                                <td>@ficha</td>
+                                <th>
+                                    <button type="submit" name="column" value="@i">@columnas[i]</button>
+                                </th>
                             }
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @for (int row = 5; row >= 0; row--)
+                        {
+                            <tr>
+                                @for (int col = 0; col < 7; col++)
+                                {
+                                    char cell = grid[row * 7 + col];
+                                    string ficha = cell == '1' ? "🟡" : cell == '2' ? "🔴" : "⬜";
+                                    <td>@ficha</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         }
-    }
+    </main>
+
+    <footer>&copy; @DateTime.Now.Year - Proyecto Connect4</footer>
 </body>
 </html>

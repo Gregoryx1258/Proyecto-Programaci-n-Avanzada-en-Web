@@ -3,40 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\views\\games\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|c:\\users\\heymm\\documents\\proyecto-programaci-n-avanzada-en-web\\connect4\\connect4\\views\\players\\createplayer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\views\\players\\createplayer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|c:\\users\\heymm\\documents\\proyecto-programaci-n-avanzada-en-web\\connect4\\connect4\\views\\games\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\views\\games\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\views\\games\\board.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\views\\games\\board.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|c:\\users\\heymm\\documents\\proyecto-programaci-n-avanzada-en-web\\connect4\\connect4\\database\\games.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\database\\games.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|c:\\users\\heymm\\documents\\proyecto-programaci-n-avanzada-en-web\\connect4\\connect4\\views\\games\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\views\\games\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\controllers\\playerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\controllers\\playerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|c:\\users\\heymm\\documents\\proyecto-programaci-n-avanzada-en-web\\connect4\\connect4\\views\\players\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\views\\players\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\views\\games\\board.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\views\\games\\board.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\views\\games\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\views\\games\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|c:\\users\\heymm\\documents\\proyecto-programaci-n-avanzada-en-web\\connect4\\connect4\\database\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
-      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\database\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
+      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\database\\games.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\database\\games.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\connect4\\database\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
+      "RelativeMoniker": "D:0:0:{54065A5F-9647-40A5-A386-D291E309BA9C}|Connect4\\Connect4.csproj|solutionrelative:connect4\\database\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,75 +54,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Games.cs",
-              "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Database\\Games.cs",
-              "RelativeDocumentMoniker": "Connect4\\Database\\Games.cs",
-              "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Database\\Games.cs",
-              "RelativeToolTip": "Connect4\\Database\\Games.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAowB8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-03T17:38:23.051Z",
+              "DocumentIndex": 0,
+              "Title": "CreatePlayer.cshtml",
+              "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Players\\CreatePlayer.cshtml",
+              "RelativeDocumentMoniker": "Connect4\\Views\\Players\\CreatePlayer.cshtml",
+              "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Players\\CreatePlayer.cshtml",
+              "RelativeToolTip": "Connect4\\Views\\Players\\CreatePlayer.cshtml",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAAwI0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-03T18:38:17.371Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Model1.edmx [Diagram1]",
-              "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Database\\Model1.edmx",
-              "RelativeDocumentMoniker": "Connect4\\Database\\Model1.edmx",
-              "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Database\\Model1.edmx [Diagram1]",
-              "RelativeToolTip": "Connect4\\Database\\Model1.edmx [Diagram1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
-              "WhenOpened": "2025-08-03T17:36:09.228Z",
-              "EditorCaption": " [Diagram1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Games\\Create.cshtml",
               "RelativeDocumentMoniker": "Connect4\\Views\\Games\\Create.cshtml",
               "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Games\\Create.cshtml",
               "RelativeToolTip": "Connect4\\Views\\Games\\Create.cshtml",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAAAAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAJIAAAAAAAAAAAAAwKQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-08-03T05:10:18.702Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "PlayersController.cs",
               "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Controllers\\PlayersController.cs",
               "RelativeDocumentMoniker": "Connect4\\Controllers\\PlayersController.cs",
               "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Controllers\\PlayersController.cs",
               "RelativeToolTip": "Connect4\\Controllers\\PlayersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAxwCYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-03T05:06:48.02Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Games\\Index.cshtml",
               "RelativeDocumentMoniker": "Connect4\\Views\\Games\\Index.cshtml",
               "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Games\\Index.cshtml",
               "RelativeToolTip": "Connect4\\Views\\Games\\Index.cshtml",
-              "ViewState": "AgIAAJIAAAAAAAAAAAAAwKQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAwK0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-08-03T04:41:45.827Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "GamesController.cs",
               "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Controllers\\GamesController.cs",
               "RelativeDocumentMoniker": "Connect4\\Controllers\\GamesController.cs",
@@ -122,47 +118,82 @@
               "RelativeToolTip": "Connect4\\Controllers\\GamesController.cs",
               "ViewState": "AgIAANcAAAAAAAAAAAAAAO4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-14T02:34:16.199Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-14T02:34:16.199Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Board.cshtml",
               "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Games\\Board.cshtml",
               "RelativeDocumentMoniker": "Connect4\\Views\\Games\\Board.cshtml",
               "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Games\\Board.cshtml",
               "RelativeToolTip": "Connect4\\Views\\Games\\Board.cshtml",
-              "ViewState": "AgIAAG4AAAAAAAAAAAAAwIAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAAwNYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-07-14T02:30:27.879Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Players\\Index.cshtml",
+              "RelativeDocumentMoniker": "Connect4\\Views\\Players\\Index.cshtml",
+              "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Players\\Index.cshtml",
+              "RelativeToolTip": "Connect4\\Views\\Players\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAK4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-03T18:13:25.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Connect4\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Connect4\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAAwIwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-14T02:32:07.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Model1.edmx [Diagram1]",
+              "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Database\\Model1.edmx",
+              "RelativeDocumentMoniker": "Connect4\\Database\\Model1.edmx",
+              "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Database\\Model1.edmx [Diagram1]",
+              "RelativeToolTip": "Connect4\\Database\\Model1.edmx [Diagram1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
+              "WhenOpened": "2025-08-03T17:36:09.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Connect4\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Connect4\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-03T05:06:48.787Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Connect4\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Connect4\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAI4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-14T02:32:07.436Z",
-              "EditorCaption": ""
+              "DocumentIndex": 9,
+              "Title": "Games.cs",
+              "DocumentMoniker": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Database\\Games.cs",
+              "RelativeDocumentMoniker": "Connect4\\Database\\Games.cs",
+              "ToolTip": "C:\\Users\\heymm\\Documents\\Proyecto-Programaci-n-Avanzada-en-Web\\Connect4\\Connect4\\Database\\Games.cs",
+              "RelativeToolTip": "Connect4\\Database\\Games.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAowB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-03T17:38:23.051Z"
             }
           ]
         }

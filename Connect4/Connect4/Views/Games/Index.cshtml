@@ -126,6 +126,7 @@
                 <th>Jugador 2</th>
                 <th>Estado</th>
                 <th>Ganador</th>
+                <th>Creado el</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -136,14 +137,21 @@
                 string jugador2 = game.Players2?.Name ?? "Jugador 2";
                 string ganador;
 
-                if (game.Status == "Finalizado" && game.WinnerId.HasValue)
+                if (game.Status == "Finalizado")
                 {
-                    ganador = game.WinnerId == game.Player1Id ? jugador1 :
-                              game.WinnerId == game.Player2Id ? jugador2 : "Desconocido";
+                    if (game.WinnerId.HasValue)
+                    {
+                        ganador = game.WinnerId == game.Player1Id ? jugador1 :
+                                  game.WinnerId == game.Player2Id ? jugador2 : "Desconocido";
+                    }
+                    else
+                    {
+                        ganador = "Empate";
+                    }
                 }
                 else
                 {
-                    ganador = "Empate o en curso";
+                    ganador = "En curso";
                 }
 
                 <tr>
@@ -151,6 +159,7 @@
                     <td>@jugador2</td>
                     <td>@game.Status</td>
                     <td>@ganador</td>
+                    <td>@game.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
                     <td>
                         @Html.ActionLink("Ver", "Board", new { id = game.Id }, new { @class = "btn-view" })
                     </td>

@@ -163,6 +163,7 @@
     <Content Include="Database\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Players\CreatePlayer.cshtml" />
     <None Include="Views\Games\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
