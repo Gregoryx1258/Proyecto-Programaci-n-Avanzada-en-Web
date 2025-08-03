@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Connect4DBModelStoreContainer" CdmEntityContainer="Connect4DBEntities2">
+  <EntityContainerMapping StorageEntityContainer="Connect4DBModelStoreContainer" CdmEntityContainer="Connect4DBEntities3">
     <EntitySetMapping Name="Games">
       <EntityTypeMapping TypeName="Connect4DBModel.Games">
         <MappingFragment StoreEntitySet="Games">

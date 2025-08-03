@@ -6,7 +6,7 @@ namespace Connect4.Controllers
 {
     public class PlayersController : Controller
     {
-        private Connect4DBEntities2 db = new Connect4DBEntities2();
+        private Connect4DBEntities3 db = new Connect4DBEntities3();
 
         public ActionResult Index()
         {

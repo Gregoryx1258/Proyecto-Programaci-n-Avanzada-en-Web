@@ -81,7 +81,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Connect4DBEntities2" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Connect4DBEntities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Games" EntityType="Self.Games" />
     <EntitySet Name="Players" EntityType="Self.Players" />
     <AssociationSet Name="FK__Games__CurrentTu__534D60F1" Association="Self.FK__Games__CurrentTu__534D60F1">
