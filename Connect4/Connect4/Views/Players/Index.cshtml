@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Connect4.Database.Players>
+@model IEnumerable<Connect4.Database.Players>
 @{
     Layout = null;
     ViewBag.Title = "Listado de Jugadores";
@@ -18,45 +18,82 @@
             background: linear-gradient(to right, #1a1a2e, #16213e);
             display: flex;
             flex-direction: column;
-            align-items: center;
             min-height: 100vh;
+            color: #fff;
         }
 
         header {
+            width: 100%;
+            background-color: #0f0f1a;
+            padding: 25px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
         }
 
         .actions {
             display: flex;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
-            .actions a {
-                text-decoration: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                font-weight: bold;
-                color: #fff;
-            }
+        .actions a {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .btn-green {
+            background-color: #43a047;
+        }
+
+        .btn-blue {
+            background-color: #1e88e5;
+        }
+
+        .btn-cyan {
+            background-color: #00bcd4;
+        }
+
+        .btn-disabled {
+            background-color: #555;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        main {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
 
         h2 {
-            margin-top: 40px;
-            color: white;
+            margin-bottom: 30px;
             font-size: 36px;
+            color: #e0f7fa;
         }
 
         table {
             width: 90%;
             max-width: 1100px;
             border-collapse: collapse;
-            margin-top: 30px;
             background: #ffffff;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             border-radius: 10px;
             overflow: hidden;
+            color: black;
         }
 
         th, td {
@@ -79,64 +116,59 @@
             background-color: #e0f2f1;
         }
 
-
-        .btn-blue {
-            background-color: #1e88e5;
-        }
-
-        .btn-green {
-            background-color: #43a047;
-        }
-
-        .btn-cyan {
-            background-color: #00bcd4;
-        }
-
         footer {
-            margin-top: auto;
-            margin-bottom: 10px;
+            width: 100%;
+            background-color: #0f0f1a;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 14px;
             color: white;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
     <header>
+        <div class="logo">Connect4</div>
         <div class="actions">
-            <a href="@Url.Action("/", "Home")" class="btn btn-green">Inicio</a>
-            <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver Jugadores</a>
-            <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Registro de partidas</a>
+            <a href="@Url.Action("Index", "Home")" class="btn-green">Inicio</a>
+            <a class="btn-blue btn-disabled">Ver Jugadores</a>
+            <a href="@Url.Action("Index", "Games")" class="btn-cyan">Registro de partidas</a>
         </div>
     </header>
-    <h2>Listado de Jugadores</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Cédula</th>
-                <th>Nombre</th>
-                <th>Puntaje</th>
-                <th>Ganados</th>
-                <th>Perdidos</th>
-                <th>Empates</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var jugador in Model)
-            {
+    <main>
+        <h2>Listado de Jugadores</h2>
+
+        <table>
+            <thead>
                 <tr>
-                    <td>@jugador.Id</td>
-                    <td>@jugador.Identification</td>
-                    <td>@jugador.Name</td>
-                    <td>@jugador.Score</td>
-                    <td>@jugador.Wins</td>
-                    <td>@jugador.Losses</td>
-                    <td>@jugador.Draws</td>
+                    <th>ID</th>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                    <th>Puntaje</th>
+                    <th>Ganados</th>
+                    <th>Perdidos</th>
+                    <th>Empates</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var jugador in Model)
+                {
+                    <tr>
+                        <td>@jugador.Id</td>
+                        <td>@jugador.Identification</td>
+                        <td>@jugador.Name</td>
+                        <td>@jugador.Score</td>
+                        <td>@jugador.Wins</td>
+                        <td>@jugador.Losses</td>
+                        <td>@jugador.Draws</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
 
-    <footer>© 2025 - Proyecto Connect4</footer>
+    <footer>&copy; @DateTime.Now.Year - Proyecto Connect4</footer>
 </body>
 </html>

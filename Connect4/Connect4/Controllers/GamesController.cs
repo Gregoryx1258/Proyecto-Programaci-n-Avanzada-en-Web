@@ -1,14 +1,15 @@
-﻿using System;
+using Connect4.Database;
+using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using Connect4.Database;
 
 namespace Connect4.Controllers
 {
     public class GamesController : Controller
     {
-        private Connect4DBEntities2 db = new Connect4DBEntities2();
+        private readonly Connect4DBEntities3 db = new Connect4DBEntities3();
 
         public GamesController()
         {
@@ -22,6 +23,7 @@ namespace Connect4.Controllers
                 .Include(g => g.Players1)
                 .Include(g => g.Players2)
                 .Include(g => g.Players3)
+                .OrderByDescending(g => g.CreatedAt)
                 .ToList();
 
             return View(games);
@@ -30,8 +32,9 @@ namespace Connect4.Controllers
         // GET: Games/Create
         public ActionResult Create()
         {
-            ViewBag.Player1Id = new SelectList(db.Players, "Id", "Name");
-            ViewBag.Player2Id = new SelectList(db.Players, "Id", "Name");
+            var jugadores = db.Players.ToList();
+            ViewBag.Player1Id = new SelectList(jugadores, "Id", "Name");
+            ViewBag.Player2Id = new SelectList(jugadores, "Id", "Name");
             return View();
         }
 
@@ -53,19 +56,23 @@ namespace Connect4.Controllers
                 return RedirectToAction("Board", new { id = game.Id });
             }
 
-            ViewBag.Player1Id = new SelectList(db.Players, "Id", "Name", game.Player1Id);
-            ViewBag.Player2Id = new SelectList(db.Players, "Id", "Name", game.Player2Id);
+            var jugadores = db.Players.ToList();
+            ViewBag.Player1Id = new SelectList(jugadores, "Id", "Name", game.Player1Id);
+            ViewBag.Player2Id = new SelectList(jugadores, "Id", "Name", game.Player2Id);
             return View(game);
         }
 
         // GET: Games/Board/5
-        public ActionResult Board(int id)
+        public ActionResult Board(int? id)
         {
+            if (!id.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             var game = db.Games
                 .Include(g => g.Players1)
                 .Include(g => g.Players2)
                 .Include(g => g.Players3)
-                .FirstOrDefault(g => g.Id == id);
+                .FirstOrDefault(g => g.Id == id.Value);
 
             if (game == null)
                 return HttpNotFound();
@@ -103,32 +110,27 @@ namespace Connect4.Controllers
             }
 
             game.GridJson = new string(grid);
-
-            // Verificar si hay un ganador
             bool hayGanador = CheckWinner(game.GridJson, ficha);
-            bool isBoardFull = !game.GridJson.Contains('0');
+            bool tableroLleno = !game.GridJson.Contains('0');
 
             if (hayGanador)
             {
                 game.Status = "Finalizado";
-                game.WinnerId = (ficha == '1') ? game.Player1Id : game.Player2Id;
+                game.WinnerId = ficha == '1' ? game.Player1Id : game.Player2Id;
             }
-            else if (isBoardFull) // Tablero lleno = empate
+            else if (tableroLleno)
             {
                 game.Status = "Finalizado";
-                game.WinnerId = null; // Empate
+                game.WinnerId = null;
             }
             else
             {
-                // Cambiar turno
-                game.CurrentTurnId = (game.CurrentTurnId == game.Player1Id) ? game.Player2Id : game.Player1Id;
+                game.CurrentTurnId = game.CurrentTurnId == game.Player1Id ? game.Player2Id : game.Player1Id;
             }
 
-            
             db.Entry(game).State = EntityState.Modified;
             db.SaveChanges();
 
-            // Recalcular estadísticas
             if (game.Status == "Finalizado")
             {
                 RecalcularEstadisticas();
@@ -148,36 +150,24 @@ namespace Connect4.Controllers
                 {
                     int idx = row * cols + col;
 
-                    // Horizontal
                     if (col <= cols - 4 &&
-                        grid[idx] == ficha &&
-                        grid[idx + 1] == ficha &&
-                        grid[idx + 2] == ficha &&
-                        grid[idx + 3] == ficha)
+                        grid[idx] == ficha && grid[idx + 1] == ficha &&
+                        grid[idx + 2] == ficha && grid[idx + 3] == ficha)
                         return true;
 
-                    // Vertical
                     if (row <= rows - 4 &&
-                        grid[idx] == ficha &&
-                        grid[idx + cols] == ficha &&
-                        grid[idx + 2 * cols] == ficha &&
-                        grid[idx + 3 * cols] == ficha)
+                        grid[idx] == ficha && grid[idx + cols] == ficha &&
+                        grid[idx + 2 * cols] == ficha && grid[idx + 3 * cols] == ficha)
                         return true;
 
-                    // Diagonal derecha
                     if (row <= rows - 4 && col <= cols - 4 &&
-                        grid[idx] == ficha &&
-                        grid[idx + cols + 1] == ficha &&
-                        grid[idx + 2 * (cols + 1)] == ficha &&
-                        grid[idx + 3 * (cols + 1)] == ficha)
+                        grid[idx] == ficha && grid[idx + cols + 1] == ficha &&
+                        grid[idx + 2 * (cols + 1)] == ficha && grid[idx + 3 * (cols + 1)] == ficha)
                         return true;
 
-                    // Diagonal izquierda
                     if (row <= rows - 4 && col >= 3 &&
-                        grid[idx] == ficha &&
-                        grid[idx + cols - 1] == ficha &&
-                        grid[idx + 2 * (cols - 1)] == ficha &&
-                        grid[idx + 3 * (cols - 1)] == ficha)
+                        grid[idx] == ficha && grid[idx + cols - 1] == ficha &&
+                        grid[idx + 2 * (cols - 1)] == ficha && grid[idx + 3 * (cols - 1)] == ficha)
                         return true;
                 }
             }
@@ -211,6 +201,35 @@ namespace Connect4.Controllers
             db.SaveChanges();
         }
 
+        [HttpPost]
+        public ActionResult RestartGame(int id)
+        {
+            var partidaActual = db.Games.Find(id);
+            if (partidaActual == null)
+                return HttpNotFound();
+
+            if (partidaActual.Status != "Finalizado")
+            {
+                partidaActual.Status = "Finalizado";
+                db.Entry(partidaActual).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            var nuevaPartida = new Games
+            {
+                Player1Id = partidaActual.Player1Id,
+                Player2Id = partidaActual.Player2Id,
+                GridJson = new string('0', 42),
+                CurrentTurnId = partidaActual.Player1Id,
+                Status = "En progreso",
+                CreatedAt = DateTime.Now
+            };
+
+            db.Games.Add(nuevaPartida);
+            db.SaveChanges();
+
+            return RedirectToAction("Board", new { id = nuevaPartida.Id });
+        }
 
         [HttpGet]
         public ActionResult RecalcularEstadisticasManual()
@@ -218,6 +237,13 @@ namespace Connect4.Controllers
             RecalcularEstadisticas();
             TempData["Success"] = "Estadísticas actualizadas correctamente";
             return RedirectToAction("Index", "Players"); 
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

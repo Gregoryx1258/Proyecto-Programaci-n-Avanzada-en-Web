@@ -21,9 +21,8 @@ namespace Connect4.Database
         public int CurrentTurnId { get; set; }
         public string Status { get; set; }
         public Nullable<int> WinnerId { get; set; }
-        public DateTime CreatedAt { get; set; }
-
-
+        public System.DateTime CreatedAt { get; set; }
+    
         public virtual Players Players { get; set; }
         public virtual Players Players1 { get; set; }
         public virtual Players Players2 { get; set; }

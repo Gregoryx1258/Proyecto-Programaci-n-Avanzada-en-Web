@@ -1,168 +1,192 @@
-﻿@model Connect4.Database.Games
-
+@model Connect4.Database.Games
 @{
     ViewBag.Title = "Partida en juego";
+    Layout = null;
     string[] columnas = { "A", "B", "C", "D", "E", "F", "G" };
     string grid = Model.GridJson ?? new string('0', 42);
-    int playerId = Model.CurrentTurnId == Model.Player1Id ? 1 : 2;
     bool juegoFinalizado = Model.Status == "Finalizado";
+    string jugador1 = Model.Players1?.Name ?? "Jugador 1";
+    string jugador2 = Model.Players2?.Name ?? "Jugador 2";
 }
 
-<style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        font-family: 'Segoe UI', sans-serif;
-        background: linear-gradient(to right, #1a1a2e, #16213e);
-        color: #fff;
-    }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Connect4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #1a1a2e, #16213e);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 30px;
-        background-color: #0f0f1a;
-    }
+        header {
+            width: 100%;
+            background-color: #0f0f1a;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
 
-    .logo {
-        font-size: 28px;
-        font-weight: bold;
-    }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-    .actions {
-        display: flex;
-        gap: 15px;
-    }
+        .actions {
+            display: flex;
+            gap: 15px;
+        }
 
         .actions a {
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 4px;
             font-weight: bold;
             color: #fff;
         }
 
-    main {
-        text-align: center;
-        padding: 100px 20px;
-        flex: 1;
-    }
+        .btn-green {
+            background-color: #43a047;
+        }
 
-    h1 {
-        font-size: 48px;
-        margin-bottom: 20px;
-        color: #e0f7fa;
-    }
+        .btn-blue {
+            background-color: #1e88e5;
+        }
 
-    h2 {
-        font-size: 48px;
-        margin-bottom: 20px;
-        color: white;
-    }
+        .btn-cyan {
+            background-color: #00bcd4;
+        }
 
-    p {
-        font-size: 18px;
-        max-width: 600px;
-        margin: 0 auto 30px auto;
-        color: white;
-    }
+        main {
+            text-align: center;
+            padding: 40px 20px;
+            flex: 1;
+        }
 
+        table {
+            margin: auto;
+            background: #fff;
+            border-collapse: collapse;
+            color: black;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
 
+        th, td {
+            width: 60px;
+            height: 60px;
+            font-size: 32px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
 
-    .btn {
-        padding: 15px 30px;
-        font-size: 16px;
-        cursor: pointer;
-        text-decoration: none;
-        transition: background-color 0.3s ease;
-    }
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-    .btn-blue {
-        background-color: #1e88e5;
-    }
+        .btn-primary {
+            background: #2196f3;
+            color: white;
+        }
 
-    .btn-green {
-        background-color: #43a047;
-    }
+        .btn-warning {
+            background: #fbc02d;
+            color: black;
+        }
 
-    .btn-cyan {
-        background-color: #00bcd4;
-    }
+        .btn-secondary {
+            background: #607d8b;
+            color: white;
+        }
 
-    .btn:hover {
-        opacity: 0.85;
-    }
+        .trophy-icon {
+            color: gold;
+            margin-right: 10px;
+        }
 
-    footer {
-        background-color: #0f0f1a;
-        color: #999;
-        text-align: center;
-        padding: 20px;
-    }
-</style>
+        footer {
+            width: 100%;
+            background-color: #0f0f1a;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 14px;
+            color: white;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Connect4</div>
+        <div class="actions">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-green">Inicio</a>
+            <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver Jugadores</a>
+            <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Registro de partidas</a>
+        </div>
+    </header>
 
-    <div class="text-center mb-4">
-        <h2 class="display-5">
-            <i class="bi bi-controller" style="font-size: 2rem;"></i>
-            Partida entre
-            <span class="text-info">@Model.Players1.Name</span>
-            y
-            <span class="text-danger">@Model.Players2.Name</span>
-        </h2>
+    <main>
+        <h2>Partida entre @jugador1 y @jugador2</h2>
+        <p>Creada el: @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</p>
 
-        @if (juegoFinalizado && Model.WinnerId.HasValue)
+        @if (juegoFinalizado)
         {
-            <div class="alert alert-success mt-3" role="alert">
-                🏆 ¡Felicidades <strong>@(Model.WinnerId == Model.Player1Id ? Model.Players1.Name : Model.Players2.Name)</strong>! Has ganado la partida.
-            </div>
-            <a href="@Url.Action("Index", "Games")" class="btn btn-outline-secondary mt-2">Volver a la lista de partidas</a>
+            if (Model.WinnerId.HasValue)
+            {
+                string ganador = Model.WinnerId == Model.Player1Id ? jugador1 : jugador2;
+                <h3><i class="bi bi-trophy-fill trophy-icon"></i>El ganador es: @ganador</h3>
+            }
+            else
+            {
+                <h3>Resultado: Empate</h3>
+            }
         }
         else
         {
-            <p class="lead">
-                Turno de:
-                <strong class="text-success">
-                    @(Model.CurrentTurnId == Model.Player1Id ? Model.Players1.Name : Model.Players2.Name)
-                </strong>
-            </p>
+            string turno = Model.CurrentTurnId == Model.Player1Id ? jugador1 : jugador2;
+            <h3>Turno de: @turno</h3>
         }
 
-        @if (TempData["Error"] != null)
-        {
-            <div class="alert alert-warning mt-3" role="alert">
-                @TempData["Error"]
-            </div>
-        }
-    </div>
+        <a href="@Url.Action("Index", "Games")" class="btn btn-secondary">Volver</a>
 
-    <div class="table-responsive d-flex justify-content-center">
+        <form method="post" action="@Url.Action("RestartGame", "Games", new { id = Model.Id })">
+            <button type="submit" class="btn btn-warning">
+                @(juegoFinalizado ? "Nueva partida" : "Reiniciar partida")
+            </button>
+        </form>
+
         @if (!juegoFinalizado)
         {
-            <!-- Formulario solo se muestra si la partida sigue en progreso -->
-        }
-    </div>
-
-    @if (!juegoFinalizado)
-    {
-        using (Html.BeginForm("Play", "Games", FormMethod.Post))
-        {
-            @Html.Hidden("id", Model.Id)
-            @Html.Hidden("player", playerId)
-
-            <div class="table-responsive d-flex justify-content-center">
-                <table class="table table-bordered text-center" style="width: auto; background-color: #f9f9f9;">
-                    <thead class="thead-dark">
+            using (Html.BeginForm("Play", "Games", FormMethod.Post))
+            {
+                @Html.Hidden("id", Model.Id)
+                <table>
+                    <thead>
                         <tr>
                             @for (int i = 0; i < 7; i++)
                             {
-                                <th style="width: 60px;">
-                                    <button type="submit" name="column" value="@i" class="btn btn-sm btn-outline-primary">
-                                        @columnas[i]
-                                    </button>
+                                <th>
+                                    <button type="submit" name="column" value="@i">@columnas[i]</button>
                                 </th>
                             }
                         </tr>
@@ -173,42 +197,18 @@
                             <tr>
                                 @for (int col = 0; col < 7; col++)
                                 {
-                                    var cell = grid[row * 7 + col];
+                                    char cell = grid[row * 7 + col];
                                     string ficha = cell == '1' ? "🟡" : cell == '2' ? "🔴" : "⬜";
-                                    <td style="font-size: 32px;">@ficha</td>
+                                    <td>@ficha</td>
                                 }
                             </tr>
                         }
                     </tbody>
                 </table>
-            </div>
+            }
         }
-    }
-    else
-    {
-        <div class="table-responsive d-flex justify-content-center">
-            <table class="table table-bordered text-center" style="width: auto;">
-                <thead class="thead-dark">
-                    <tr>
-                        @foreach (var col in columnas)
-                        {
-                            <th style="width: 60px;">@col</th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int row = 5; row >= 0; row--)
-                    {
-                        <tr>
-                            @for (int col = 0; col < 7; col++)
-                            {
-                                var cell = grid[row * 7 + col];
-                                string ficha = cell == '1' ? "🟡" : cell == '2' ? "🔴" : "⬜";
-                                <td style="font-size: 32px;">@ficha</td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    }
+    </main>
+
+    <footer>&copy; @DateTime.Now.Year - Proyecto Connect4</footer>
+</body>
+</html>

@@ -1,0 +1,141 @@
+﻿@model Connect4.Database.Players
+
+@{
+    ViewBag.Title = "Crear Jugador";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Crear Jugador - Connect4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            background: linear-gradient(to right, #1a1a2e, #16213e);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #0f0f1a;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+            .actions a {
+                text-decoration: none;
+                padding: 10px 18px;
+                border-radius: 4px;
+                font-weight: bold;
+                color: #fff;
+            }
+
+        .btn-green {
+            background-color: #43a047;
+        }
+
+        .btn-blue {
+            background-color: #1e88e5;
+        }
+
+        .btn-cyan {
+            background-color: #00bcd4;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background-color: #222831;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #f8f9fa;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #43a047;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #0f0f1a;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 14px;
+            color: white;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Connect4</div>
+        <div class="actions">
+            <a href="@Url.Action("Index", "Home")" class="btn-green">Inicio</a>
+            <a href="@Url.Action("Index", "Players")" class="btn-blue">Ver Jugadores</a>
+            <a href="@Url.Action("Index", "Games")" class="btn-cyan">Registro de partidas</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Crear Nuevo Jugador</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <label for="Identification">Cédula</label>
+            @Html.TextBoxFor(model => model.Identification, new { @type = "number", @required = "required" })
+
+            <label for="Name">Nombre</label>
+            @Html.TextBoxFor(model => model.Name, new { @required = "required" })
+
+            <button type="submit" class="btn-submit">Guardar Jugador</button>
+        }
+    </div>
+
+    <footer>&copy; @DateTime.Now.Year - Proyecto Connect4</footer>
+</body>
+</html>

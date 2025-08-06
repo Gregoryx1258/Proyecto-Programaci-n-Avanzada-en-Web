@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Connect4.Database.Games>
+@model IEnumerable<Connect4.Database.Games>
 @{
     Layout = null;
     ViewBag.Title = "Lista de Partidas";
@@ -16,48 +16,58 @@
             padding: 0;
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(to right, #1a1a2e, #16213e);
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
 
-
         header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-        }
-
-        .actions {
-            display: flex;
+            justify-content: center;
             gap: 15px;
+            padding: 15px;
+            background-color: #0f0f1a;
+            width: 100%;
         }
 
-            .actions a {
-                text-decoration: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                font-weight: bold;
-                color: #fff;
-            }
+        .btn {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .btn-green {
+            background-color: #43a047;
+        }
+
+        .btn-blue {
+            background-color: #1e88e5;
+        }
+
+        .btn-cyan {
+            background-color: #00bcd4;
+        }
 
         h2 {
-            margin-top: 40px;
-            color: white;
+            margin-top: 20px;
             font-size: 36px;
+            color: #e0f7fa;
         }
 
         table {
             width: 90%;
             max-width: 1100px;
             border-collapse: collapse;
-            margin-top: 30px;
+            margin: 30px auto;
             background: #ffffff;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             border-radius: 10px;
             overflow: hidden;
+            color: black;
         }
 
         th, td {
@@ -69,7 +79,6 @@
         th {
             background-color: #213435;
             color: white;
-            font-weight: bold;
         }
 
         tr:nth-child(even) {
@@ -80,7 +89,7 @@
             background-color: #e0f2f1;
         }
 
-        a {
+        .btn-view {
             background-color: #2196f3;
             color: white;
             padding: 6px 14px;
@@ -89,67 +98,76 @@
             font-weight: bold;
         }
 
-            a:hover {
-                background-color: #1769aa;
-            }
-
-        .btn-blue {
-            background-color: #1e88e5;
-        }
-
-        .btn-green {
-            background-color: #43a047;
-        }
-
-        .btn-cyan {
-            background-color: #00bcd4;
+        .btn-view:hover {
+            background-color: #1769aa;
         }
 
         footer {
             margin-top: auto;
             margin-bottom: 10px;
             color: white;
+            font-size: 12px;
         }
     </style>
 </head>
-    <body>
-        <header>
-            <div class="actions">
-                <a href="@Url.Action("/", "Home")" class="btn btn-green">Inicio</a>
-                <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver Jugadores</a>
-                <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Registro de partidas</a>
-            </div>
-        </header>
-        <h2>Partidas Registradas</h2>
+<body>
+    <header>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-green">Inicio</a>
+        <a href="@Url.Action("Index", "Players")" class="btn btn-blue">Ver Jugadores</a>
+        <a href="@Url.Action("Index", "Games")" class="btn btn-cyan">Registro de partidas</a>
+    </header>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Jugador 1</th>
-                    <th>Jugador 2</th>
-                    <th>Estado</th>
-                    <th>Ganador</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var game in Model)
+    <h2>Partidas Registradas</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Jugador 1</th>
+                <th>Jugador 2</th>
+                <th>Estado</th>
+                <th>Ganador</th>
+                <th>Creado el</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model)
+            {
+                string jugador1 = game.Players1?.Name ?? "Jugador 1";
+                string jugador2 = game.Players2?.Name ?? "Jugador 2";
+                string ganador;
+
+                if (game.Status == "Finalizado")
                 {
-                    <tr>
-                        <td>@game.Players1?.Name</td>
-                        <td>@game.Players2?.Name</td>
-                        <td>@game.Status</td>
-                        <td>@(game.WinnerId.HasValue ? game.Players3?.Name : "Empate o en curso")</td>
-                        <td>
-                            @Html.ActionLink("Ver", "Board", new { id = game.Id })
-                        </td>
-                    </tr>
+                    if (game.WinnerId.HasValue)
+                    {
+                        ganador = game.WinnerId == game.Player1Id ? jugador1 :
+                                  game.WinnerId == game.Player2Id ? jugador2 : "Desconocido";
+                    }
+                    else
+                    {
+                        ganador = "Empate";
+                    }
                 }
-            </tbody>
-        </table>
+                else
+                {
+                    ganador = "En curso";
+                }
 
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Proyecto Connect4</p>
-        </footer>
-    </body>
+                <tr>
+                    <td>@jugador1</td>
+                    <td>@jugador2</td>
+                    <td>@game.Status</td>
+                    <td>@ganador</td>
+                    <td>@game.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        @Html.ActionLink("Ver", "Board", new { id = game.Id }, new { @class = "btn-view" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <footer>&copy; @DateTime.Now.Year - Proyecto Connect4</footer>
+</body>
 </html>
