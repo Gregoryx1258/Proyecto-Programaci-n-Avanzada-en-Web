@@ -52,24 +52,14 @@
             color: #fff;
         }
 
-        .btn-green {
-            background-color: #43a047;
-        }
-
-        .btn-blue {
-            background-color: #1e88e5;
-        }
-
-        .btn-cyan {
-            background-color: #00bcd4;
-        }
-
         main {
+            width: 100%;
             flex: 1;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             padding: 40px 20px;
+            box-sizing: border-box;
         }
 
         .container {
@@ -83,10 +73,9 @@
         }
 
         h2 {
-            text-align: center;
             margin-bottom: 30px;
-            font-weight: 600;
-            color: #f8f9fa;
+            font-size: 36px;
+            color: #e0f7fa;
         }
 
         label {
@@ -98,8 +87,25 @@
             margin-bottom: 20px;
         }
 
-        .btn-success {
-            width: 100%;
+
+        th, td {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #213435;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        tr:hover {
+            background-color: #e0f2f1;
         }
 
         footer {
@@ -117,15 +123,17 @@
     <header>
         <div class="logo">Connect4</div>
         <div class="actions">
-            <a href="@Url.Action("Index", "Home")" class="btn-green">Inicio</a>
-            <a href="@Url.Action("Index", "Players")" class="btn-blue">Ver Jugadores</a>
-            <a href="@Url.Action("Index", "Games")" class="btn-cyan">Registro de partidas</a>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Inicio</a>
+            <a href="@Url.Action("CreatePlayer", "Players")" class="btn text-dark btn-warning">Crear Jugador</a>
+            <a href="@Url.Action("Index", "Players")" class="btn btn-success">Ver Jugadores</a>
+            <a href="@Url.Action("Index", "Games")" class="btn text-dark btn-light ">Registro de partidas</a>
+            <a href="@Url.Action("Create", "Games")" class="btn btn-danger">Crear Partida</a>
         </div>
     </header>
 
     <main>
         <div class="container">
-            <h2>Seleccionar Jugadores</h2>
+            <h2>Seleccionar jugadores</h2>
 
             @using (Html.BeginForm())
             {
