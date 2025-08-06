@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Connect4.Database.Players>
+@model IEnumerable<Connect4.Database.Players>
 @{
     Layout = null;
     ViewBag.Title = "Listado de Jugadores";
@@ -15,11 +15,11 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to right, #e0f7fa, #e0ffe0);
+            background: linear-gradient(to right, #1a1a2e, #16213e);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            color: #213435;
+            color: #fff;
         }
 
         header {
@@ -29,7 +29,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white;
             box-sizing: border-box;
         }
 
@@ -44,13 +43,13 @@
             flex-wrap: wrap;
         }
 
-            .actions a {
-                text-decoration: none;
-                padding: 10px 18px;
-                border-radius: 4px;
-                font-weight: bold;
-                color: #fff;
-            }
+        .actions a {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+        }
 
         .btn-green {
             background-color: #43a047;
@@ -83,7 +82,7 @@
         h2 {
             margin-bottom: 30px;
             font-size: 36px;
-            color: #213435;
+            color: #e0f7fa;
         }
 
         table {
@@ -94,6 +93,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             border-radius: 10px;
             overflow: hidden;
+            color: black;
         }
 
         th, td {

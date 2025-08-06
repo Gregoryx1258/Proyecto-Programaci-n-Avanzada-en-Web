@@ -1,4 +1,4 @@
-﻿using Connect4.Database;
+using Connect4.Database;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -20,9 +20,9 @@ namespace Connect4.Controllers
         public ActionResult Index()
         {
             var games = db.Games
-                .Include(g => g.Players1) // Jugador 1
-                .Include(g => g.Players2) // Jugador 2
-                .Include(g => g.Players3) // Ganador si existe
+                .Include(g => g.Players1)
+                .Include(g => g.Players2)
+                .Include(g => g.Players3)
                 .OrderByDescending(g => g.CreatedAt)
                 .ToList();
 
@@ -121,7 +121,7 @@ namespace Connect4.Controllers
             else if (tableroLleno)
             {
                 game.Status = "Finalizado";
-                game.WinnerId = null; // Empate
+                game.WinnerId = null;
             }
             else
             {
@@ -132,11 +132,14 @@ namespace Connect4.Controllers
             db.SaveChanges();
 
             if (game.Status == "Finalizado")
+            {
                 RecalcularEstadisticas();
+            }
 
             return RedirectToAction("Board", new { id });
         }
 
+        // Lógica para verificar si hay 4 en línea
         private bool CheckWinner(string grid, char ficha)
         {
             int rows = 6, cols = 7;
@@ -168,10 +171,10 @@ namespace Connect4.Controllers
                         return true;
                 }
             }
-
             return false;
         }
 
+        // Recalcular estadísticas de todos los jugadores
         private void RecalcularEstadisticas()
         {
             var jugadores = db.Players.ToList();
@@ -180,11 +183,11 @@ namespace Connect4.Controllers
             {
                 int wins = db.Games.Count(g => g.WinnerId == jugador.Id && g.Status == "Finalizado");
                 int losses = db.Games.Count(g => g.Status == "Finalizado" &&
-                    (g.Player1Id == jugador.Id || g.Player2Id == jugador.Id) &&
-                    g.WinnerId.HasValue && g.WinnerId != jugador.Id);
+                                    (g.Player1Id == jugador.Id || g.Player2Id == jugador.Id) &&
+                                    g.WinnerId.HasValue && g.WinnerId != jugador.Id);
                 int draws = db.Games.Count(g => g.Status == "Finalizado" &&
-                    !g.WinnerId.HasValue &&
-                    (g.Player1Id == jugador.Id || g.Player2Id == jugador.Id));
+                                    !g.WinnerId.HasValue &&
+                                    (g.Player1Id == jugador.Id || g.Player2Id == jugador.Id));
                 int score = wins * 5 + draws * 2;
 
                 jugador.Wins = wins;
@@ -226,6 +229,14 @@ namespace Connect4.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Board", new { id = nuevaPartida.Id });
+        }
+
+        [HttpGet]
+        public ActionResult RecalcularEstadisticasManual()
+        {
+            RecalcularEstadisticas();
+            TempData["Success"] = "Estadísticas actualizadas correctamente";
+            return RedirectToAction("Index", "Players"); 
         }
 
         protected override void Dispose(bool disposing)

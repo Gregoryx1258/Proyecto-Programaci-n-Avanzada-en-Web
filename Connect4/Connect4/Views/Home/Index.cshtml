@@ -1,4 +1,4 @@
-﻿@{
+@{
     Layout = null;
     ViewBag.Title = "Inicio";
 }
@@ -10,7 +10,7 @@
     <title>Connect4 - Inicio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        body {
+        html, body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', sans-serif;
@@ -28,7 +28,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white;
             box-sizing: border-box;
         }
 
@@ -43,13 +42,13 @@
             flex-wrap: wrap;
         }
 
-            .actions a {
-                text-decoration: none;
-                padding: 10px 18px;
-                border-radius: 4px;
-                font-weight: bold;
-                color: #fff;
-            }
+        .actions a {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+        }
 
         .btn-green {
             background-color: #43a047;
@@ -94,18 +93,18 @@
             flex-wrap: wrap;
         }
 
-            .btn-container a {
-                padding: 15px 30px;
-                font-size: 16px;
-                border-radius: 8px;
-                color: white;
-                text-decoration: none;
-                transition: background-color 0.3s ease;
-            }
+        .btn-container a {
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
 
-                .btn-container a:hover {
-                    opacity: 0.85;
-                }
+        .btn-container a:hover {
+            opacity: 0.85;
+        }
 
         footer {
             width: 100%;
@@ -131,15 +130,13 @@
 
     <main>
         <h1>Bienvenido a Connect4</h1>
-        <p>Selecciona una opción para comenzar</p>
+        <p>Selecciona una opción para comenzar y empieza a jugar con tus amigos</p>
 
         <div class="btn-container">
             <a href="@Url.Action("Index", "Players")" class="btn-blue">Ver Jugadores</a>
             <a href="@Url.Action("Create", "Games")" class="btn-green">Crear Partida</a>
             <a href="@Url.Action("Index", "Games")" class="btn-cyan">Ver Partidas</a>
             <a href="@Url.Action("CreatePlayer", "Players")" class="btn-cyan">Crear Jugador</a>
-
-
         </div>
     </main>
 
