@@ -4,12 +4,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace Connect4.Controllers
 {
     public class GamesController : Controller
     {
-        private readonly Connect4DBEntities3 db = new Connect4DBEntities3();
+        private readonly Connect4DBEntities db = new Connect4DBEntities();
 
         public GamesController()
         {
@@ -17,6 +18,7 @@ namespace Connect4.Controllers
         }
 
         // GET: Games
+        //Lista de partidas con el nombre de los jugadores ordenadas por fecha descendente
         public ActionResult Index()
         {
             var games = db.Games
@@ -25,26 +27,31 @@ namespace Connect4.Controllers
                 .Include(g => g.Players3)
                 .OrderByDescending(g => g.CreatedAt)
                 .ToList();
-
+            //Visualizar la lista
             return View(games);
         }
 
         // GET: Games/Create
+        //Formulario para crear una nueva partida
         public ActionResult Create()
         {
             var jugadores = db.Players.ToList();
+            //Se hace un select del dropdown desde la base de datos
             ViewBag.Player1Id = new SelectList(jugadores, "Id", "Name");
             ViewBag.Player2Id = new SelectList(jugadores, "Id", "Name");
             return View();
         }
 
         // POST: Games/Create
+        //Se procesa la creacion de una nueva partida
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Games game)
         {
+            //Validacion del modelo
             if (ModelState.IsValid)
             {
+                //GridJson: tablero vacio (en 0)
                 game.GridJson = new string('0', 42);
                 game.CurrentTurnId = game.Player1Id;
                 game.Status = "En progreso";
@@ -56,6 +63,7 @@ namespace Connect4.Controllers
                 return RedirectToAction("Board", new { id = game.Id });
             }
 
+            //Si hay errores de validación, vuelve a mostrar el formulario.
             var jugadores = db.Players.ToList();
             ViewBag.Player1Id = new SelectList(jugadores, "Id", "Name", game.Player1Id);
             ViewBag.Player2Id = new SelectList(jugadores, "Id", "Name", game.Player2Id);
@@ -63,6 +71,7 @@ namespace Connect4.Controllers
         }
 
         // GET: Games/Board/5
+        //Muestra el tablero de la partida
         public ActionResult Board(int? id)
         {
             if (!id.HasValue)
@@ -81,13 +90,16 @@ namespace Connect4.Controllers
         }
 
         // POST: Games/Play
+        //Acciones del jugador
         [HttpPost]
         public ActionResult Play(int id, int column)
         {
+            //Busca la partida actual
             var game = db.Games.Find(id);
             if (game == null || game.Status != "En progreso")
                 return HttpNotFound();
 
+            //Seleccionar turnos y la ficha del jugador 
             var grid = game.GridJson.ToCharArray();
             char ficha = game.CurrentTurnId == game.Player1Id ? '1' : '2';
             bool jugadaExitosa = false;
@@ -103,6 +115,7 @@ namespace Connect4.Controllers
                 }
             }
 
+            //Columna llena de fichas
             if (!jugadaExitosa)
             {
                 TempData["Error"] = "Esta columna está llena. Elige otra.";
@@ -113,22 +126,26 @@ namespace Connect4.Controllers
             bool hayGanador = CheckWinner(game.GridJson, ficha);
             bool tableroLleno = !game.GridJson.Contains('0');
 
+            //Si hay ganador, marca la partida como finalizada y asigna el ganador.
             if (hayGanador)
             {
                 game.Status = "Finalizado";
                 game.WinnerId = ficha == '1' ? game.Player1Id : game.Player2Id;
             }
+            //Si el tablero está lleno, marca la partida como empate.
             else if (tableroLleno)
             {
                 game.Status = "Finalizado";
                 game.WinnerId = null;
             }
             else
+            //Si no, cambia el turno al otro jugador.
             {
                 game.CurrentTurnId = game.CurrentTurnId == game.Player1Id ? game.Player2Id : game.Player1Id;
             }
 
             db.Entry(game).State = EntityState.Modified;
+            //Guarda los cambios y, si la partida terminó, recalcula estadísticas.
             db.SaveChanges();
 
             if (game.Status == "Finalizado")
@@ -136,10 +153,11 @@ namespace Connect4.Controllers
                 RecalcularEstadisticas();
             }
 
+            //Redirige al tablero actualizado.
             return RedirectToAction("Board", new { id });
         }
 
-        // Lógica para verificar si hay 4 en línea
+        // Lógica para verificar si hay cuatro fichas en línea
         private bool CheckWinner(string grid, char ficha)
         {
             int rows = 6, cols = 7;
@@ -149,17 +167,18 @@ namespace Connect4.Controllers
                 for (int col = 0; col < cols; col++)
                 {
                     int idx = row * cols + col;
-
+                    
                     if (col <= cols - 4 &&
                         grid[idx] == ficha && grid[idx + 1] == ficha &&
                         grid[idx + 2] == ficha && grid[idx + 3] == ficha)
                         return true;
 
+                    
                     if (row <= rows - 4 &&
                         grid[idx] == ficha && grid[idx + cols] == ficha &&
                         grid[idx + 2 * cols] == ficha && grid[idx + 3 * cols] == ficha)
                         return true;
-
+                    
                     if (row <= rows - 4 && col <= cols - 4 &&
                         grid[idx] == ficha && grid[idx + cols + 1] == ficha &&
                         grid[idx + 2 * (cols + 1)] == ficha && grid[idx + 3 * (cols + 1)] == ficha)
@@ -174,7 +193,7 @@ namespace Connect4.Controllers
             return false;
         }
 
-        // Recalcular estadísticas de todos los jugadores
+        // Recalcula las estadísticas de todos los jugadores y las actualiza (ganados, perdidos, empates, puntaje).
         private void RecalcularEstadisticas()
         {
             var jugadores = db.Players.ToList();
@@ -188,7 +207,11 @@ namespace Connect4.Controllers
                 int draws = db.Games.Count(g => g.Status == "Finalizado" &&
                                     !g.WinnerId.HasValue &&
                                     (g.Player1Id == jugador.Id || g.Player2Id == jugador.Id));
-                int score = wins * 5 + draws * 2;
+
+                //Una unidad positiva (+1) por cada partida ganada.
+                //Una unidad negativa(-1) por cada partida perdida.
+                //Una unidad nula(0) por cada partida empatada.
+                int score = wins * 1 + losses * -1 + draws * 0;
 
                 jugador.Wins = wins;
                 jugador.Losses = losses;
@@ -202,12 +225,15 @@ namespace Connect4.Controllers
         }
 
         [HttpPost]
+        //Finaliza la partida actual (si no está finalizada) y crea una nueva partida con los mismos jugadores
         public ActionResult RestartGame(int id)
         {
+            //Busca la partida actual
             var partidaActual = db.Games.Find(id);
             if (partidaActual == null)
                 return HttpNotFound();
 
+            //•	Si no está finalizada, la marca como finalizada
             if (partidaActual.Status != "Finalizado")
             {
                 partidaActual.Status = "Finalizado";
@@ -215,6 +241,7 @@ namespace Connect4.Controllers
                 db.SaveChanges();
             }
 
+            //Crea una nueva partida con los mismos jugadores y tablero vacío
             var nuevaPartida = new Games
             {
                 Player1Id = partidaActual.Player1Id,
@@ -232,6 +259,7 @@ namespace Connect4.Controllers
         }
 
         [HttpGet]
+        //Guarda la nueva partida y redirige al tablero de la nueva partida
         public ActionResult RecalcularEstadisticasManual()
         {
             RecalcularEstadisticas();
@@ -239,6 +267,7 @@ namespace Connect4.Controllers
             return RedirectToAction("Index", "Players"); 
         }
 
+        //Medodo que se encarga de liberar correctamente los recursos utilizados por el objeto db  y cerrar la conexión a la base de datos
         protected override void Dispose(bool disposing)
         {
             if (disposing)

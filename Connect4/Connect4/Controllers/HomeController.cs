@@ -7,7 +7,7 @@ namespace Connect4.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly Connect4DBEntities3 db = new Connect4DBEntities3();
+        private readonly Connect4DBEntities db = new Connect4DBEntities();
 
         public ActionResult Index()
         {
@@ -18,7 +18,6 @@ namespace Connect4.Controllers
             }
             catch (Exception ex)
             {
-                // En producción puedes registrar este error en logs
                 ViewBag.TotalJugadores = 0;
                 ViewBag.TotalPartidas = 0;
                 ViewBag.Error = "Ocurrió un error al cargar los datos: " + ex.Message;
@@ -27,6 +26,7 @@ namespace Connect4.Controllers
             return View();
         }
 
+        //Medodo que se encarga de liberar correctamente los recursos utilizados por el objeto db  y cerrar la conexión a la base de datos
         protected override void Dispose(bool disposing)
         {
             if (disposing)

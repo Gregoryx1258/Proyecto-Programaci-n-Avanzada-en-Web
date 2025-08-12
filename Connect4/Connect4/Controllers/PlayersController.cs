@@ -7,7 +7,7 @@ namespace Connect4.Controllers
 {
     public class PlayersController : Controller
     {
-        private Connect4DBEntities3 db = new Connect4DBEntities3();
+        private Connect4DBEntities db = new Connect4DBEntities();
 
         public ActionResult Index()
         {
@@ -39,7 +39,7 @@ namespace Connect4.Controllers
             return View(player);
         }
 
-        // Código del main: Recalcular estadísticas
+        // Recalcula las estadísticas de todos los jugadores y las actualiza (ganados, perdidos, empates, puntaje).
         private void RecalcularEstadisticas()
         {
             var jugadores = db.Players.ToList();
@@ -53,7 +53,11 @@ namespace Connect4.Controllers
                 int draws = db.Games.Count(g => g.Status == "Finalizado" &&
                                     !g.WinnerId.HasValue &&
                                     (g.Player1Id == jugador.Id || g.Player2Id == jugador.Id));
-                int score = wins * 5 + draws * 2;
+
+                //Una unidad positiva (+1) por cada partida ganada.
+                //Una unidad negativa(-1) por cada partida perdida.
+                //Una unidad nula(0) por cada partida empatada.
+                int score = wins * 1 + losses * -1 + draws * 0;
 
                 jugador.Wins = wins;
                 jugador.Losses = losses;
